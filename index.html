@@ -346,6 +346,151 @@
                 text-align: center;
             }
         }
+        .add-cart {
+    width: 100%;
+    margin-top: 18px;
+    padding: 14px;
+
+    background: transparent;
+    color: #c9a96e;
+
+    border: 1px solid #c9a96e;
+
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.add-cart:hover {
+    background: #c9a96e;
+    color: #111;
+}
+
+
+.cart {
+    position: fixed;
+    top: 0;
+    right: -420px;
+
+    width: 400px;
+    max-width: 90%;
+
+    height: 100vh;
+
+    background: #151515;
+
+    z-index: 2000;
+
+    padding: 30px;
+
+    transition: 0.4s;
+
+    overflow-y: auto;
+}
+
+.cart.active {
+    right: 0;
+}
+
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #333;
+}
+
+.cart-header h2 {
+    font-weight: normal;
+}
+
+.cart-header button {
+    background: none;
+    border: none;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid #292929;
+}
+
+.cart-item p {
+    color: #c9a96e;
+    margin-top: 6px;
+}
+
+.cart-item button {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+}
+
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 30px;
+
+    font-size: 20px;
+}
+
+.cart-total strong {
+    color: #c9a96e;
+}
+
+
+.checkout-btn {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 16px;
+
+    background: #c9a96e;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+.cart-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.7);
+
+    z-index: 1500;
+
+    display: none;
+}
+
+.cart-overlay.active {
+    display: block;
+}
     </style>
 </head>
 
@@ -426,9 +571,10 @@
                 <p>Classic black elegance</p>
                 <div class="price">2,500 ETB</div>
 
-                <button class="add-cart">
-                    ADD TO CART
-                </button>
+              <button class="add-cart"
+onclick="addToCart('Noir Abaya', 2500)">
+    ADD TO CART
+</button>
             </div>
         </div>
 
@@ -446,9 +592,10 @@
                 <p>Refined luxury</p>
                 <div class="price">3,200 ETB</div>
 
-                <button class="add-cart">
-                    ADD TO CART
-                </button>
+              <button class="add-cart"
+onclick="addToCart('Royal Abaya', 3200)">
+    ADD TO CART
+</button>
             </div>
         </div>
 
@@ -466,9 +613,10 @@
                 <p>Effortless sophistication</p>
                 <div class="price">2,800 ETB</div>
 
-                <button class="add-cart">
-                    ADD TO CART
-                </button>
+<button class="add-cart"
+onclick="addToCart('Elvi Classic', 2800)">
+    ADD TO CART
+</button>
             </div>
         </div>
 
@@ -486,9 +634,10 @@
                 <p>Soft premium finish</p>
                 <div class="price">3,500 ETB</div>
 
-                <button class="add-cart">
-                    ADD TO CART
-                </button>
+<button class="add-cart"
+onclick="addToCart('Velvet Abaya', 3500)">
+    ADD TO CART
+</button>
             </div>
         </div>
 
@@ -506,9 +655,10 @@
                 <p>Modern modest style</p>
                 <div class="price">2,950 ETB</div>
 
-                <button class="add-cart">
-                    ADD TO CART
-                </button>
+<button class="add-cart"
+onclick="addToCart('Luna Abaya', 2950)">
+    ADD TO CART
+</button>
             </div>
         </div>
 
@@ -526,9 +676,10 @@
                 <p>Luxury signature piece</p>
                 <div class="price">4,000 ETB</div>
 
-                <button class="add-cart">
-                    ADD TO CART
-                </button>
+<button class="add-cart"
+onclick="addToCart('Elite Abaya', 4000)">
+    ADD TO CART
+</button>
             </div>
         </div>
 
@@ -699,5 +850,137 @@
 
     </footer>
 
+    <!-- CART -->
+
+<div class="cart" id="cart">
+
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+
+        <button onclick="closeCart()">×</button>
+    </div>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-total">
+        <span>Total</span>
+        <strong id="cart-total">0 ETB</strong>
+    </div>
+
+    <button class="checkout-btn" onclick="checkout()">
+        ORDER ON WHATSAPP
+    </button>
+
+</div>
+
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+
+
+<script>
+
+let cart = [];
+
+function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+
+    document.getElementById("cart").classList.add("active");
+    document.getElementById("cart-overlay").classList.add("active");
+}
+
+
+function updateCart() {
+
+    const items = document.getElementById("cart-items");
+
+    items.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.price;
+
+        items.innerHTML += `
+            <div class="cart-item">
+
+                <div>
+                    <strong>${item.name}</strong>
+                    <p>${item.price.toLocaleString()} ETB</p>
+                </div>
+
+                <button onclick="removeItem(${index})">
+                    Remove
+                </button>
+
+            </div>
+        `;
+    });
+
+    document.getElementById("cart-total").innerText =
+        total.toLocaleString() + " ETB";
+}
+
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+}
+
+
+function closeCart() {
+
+    document.getElementById("cart").classList.remove("active");
+
+    document
+        .getElementById("cart-overlay")
+        .classList.remove("active");
+}
+
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+    }
+
+    let message = "Hello ELVI COLLECTION!%0A%0A";
+
+    cart.forEach(item => {
+
+        message +=
+            "• " + item.name +
+            " - " +
+            item.price.toLocaleString() +
+            " ETB%0A";
+    });
+
+    let total = cart.reduce(
+        (sum, item) => sum + item.price,
+        0
+    );
+
+    message +=
+        "%0ATotal: " +
+        total.toLocaleString() +
+        " ETB";
+
+    window.open(
+        "https://wa.me/251900000000?text=" + message,
+        "_blank"
+    );
+}
+
+</script>
 </body>
 </html>
