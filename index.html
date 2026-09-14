@@ -571,6 +571,142 @@
     }
 
 }
+        /* ORDER FORM */
+
+.order-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s;
+
+    z-index: 2000;
+}
+
+.order-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.order-box {
+    width: 100%;
+    max-width: 500px;
+
+    background: #111;
+
+    border: 1px solid #c9a227;
+
+    padding: 35px;
+
+    position: relative;
+
+    transform: translateY(30px);
+
+    transition: 0.3s;
+}
+
+.order-modal.active .order-box {
+    transform: translateY(0);
+}
+
+.order-box h2 {
+    color: #c9a227;
+
+    margin-bottom: 10px;
+}
+
+#selected-product {
+    color: #ddd;
+
+    margin-bottom: 25px;
+
+    font-size: 16px;
+}
+
+.close-order {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    background: none;
+
+    border: none;
+
+    color: #c9a227;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+.order-box form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.order-box input,
+.order-box select,
+.order-box textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    background: #1a1a1a;
+
+    border: 1px solid #444;
+
+    color: white;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+.order-box input:focus,
+.order-box select:focus,
+.order-box textarea:focus {
+    border-color: #c9a227;
+}
+
+.order-box textarea {
+    resize: vertical;
+}
+
+.order-box .checkout-btn {
+    margin-top: 5px;
+
+    padding: 15px;
+
+    background: #c9a227;
+
+    color: #000;
+
+    border: none;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.order-box .checkout-btn:hover {
+    background: #e0bd3b;
+    transform: translateY(-2px);
+}
     </style>
 </head>
 
@@ -655,9 +791,8 @@
                 <p>Classic black elegance</p>
                 <div class="price">2,500 ETB</div>
 
-              <button class="add-cart"
-onclick="addToCart('Noir Abaya', 2500)">
-    ADD TO CART
+<button onclick="openOrder('Noir Abaya')">
+    ORDER NOW
 </button>
             </div>
         </div>
@@ -676,9 +811,8 @@ onclick="addToCart('Noir Abaya', 2500)">
                 <p>Refined luxury</p>
                 <div class="price">3,200 ETB</div>
 
-              <button class="add-cart"
-onclick="addToCart('Royal Abaya', 3200)">
-    ADD TO CART
+<button onclick="openOrder('Royal Abaya')">
+    ORDER NOW
 </button>
             </div>
         </div>
@@ -697,9 +831,8 @@ onclick="addToCart('Royal Abaya', 3200)">
                 <p>Effortless sophistication</p>
                 <div class="price">2,800 ETB</div>
 
-<button class="add-cart"
-onclick="addToCart('Elvi Classic', 2800)">
-    ADD TO CART
+<button onclick="openOrder('Elvi Classic')">
+    ORDER NOW
 </button>
             </div>
         </div>
@@ -718,9 +851,8 @@ onclick="addToCart('Elvi Classic', 2800)">
                 <p>Soft premium finish</p>
                 <div class="price">3,500 ETB</div>
 
-<button class="add-cart"
-onclick="addToCart('Velvet Abaya', 3500)">
-    ADD TO CART
+<button onclick="openOrder('Velvet Abaya')">
+    ORDER NOW
 </button>
             </div>
         </div>
@@ -739,9 +871,8 @@ onclick="addToCart('Velvet Abaya', 3500)">
                 <p>Modern modest style</p>
                 <div class="price">2,950 ETB</div>
 
-<button class="add-cart"
-onclick="addToCart('Luna Abaya', 2950)">
-    ADD TO CART
+<button onclick="openOrder('Luna Abaya')">
+    ORDER NOW
 </button>
             </div>
         </div>
@@ -760,9 +891,8 @@ onclick="addToCart('Luna Abaya', 2950)">
                 <p>Luxury signature piece</p>
                 <div class="price">4,000 ETB</div>
 
-<button class="add-cart"
-onclick="addToCart('Elite Abaya', 4000)">
-    ADD TO CART
+<button onclick="openOrder('Elite Abaya')">
+    ORDER NOW
 </button>
             </div>
         </div>
@@ -1082,6 +1212,148 @@ function closeMenu() {
     document
         .getElementById("main-nav")
         .classList.remove("active");
+
+}
+
+</script>
+    <!-- ORDER FORM -->
+
+<div class="order-modal" id="order-modal">
+
+    <div class="order-box">
+
+        <button class="close-order" onclick="closeOrder()">×</button>
+
+        <p class="section-label">ELVI COLLECTION</p>
+
+        <h2>Complete Your Order</h2>
+
+        <p id="selected-product">Product</p>
+
+        <form onsubmit="sendOrder(event)">
+
+            <input
+                type="text"
+                id="customer-name"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="tel"
+                id="customer-phone"
+                placeholder="Phone Number"
+                required
+            >
+
+            <select id="size" required>
+
+                <option value="">Select Size</option>
+
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>XL</option>
+                <option>XXL</option>
+
+            </select>
+
+            <input
+                type="number"
+                id="quantity"
+                value="1"
+                min="1"
+                max="10"
+                required
+            >
+
+            <textarea
+                id="address"
+                placeholder="Delivery Address"
+                rows="4"
+                required
+            ></textarea>
+
+            <button
+                class="checkout-btn"
+                type="submit"
+            >
+                SEND ORDER ON WHATSAPP
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+    <script>
+
+let selectedProduct = "";
+
+function openOrder(productName) {
+
+    selectedProduct = productName;
+
+    document.getElementById("selected-product").innerText =
+        productName;
+
+    document
+        .getElementById("order-modal")
+        .classList.add("active");
+}
+
+
+function closeOrder() {
+
+    document
+        .getElementById("order-modal")
+        .classList.remove("active");
+
+}
+
+
+function sendOrder(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("customer-name").value;
+
+    const phone =
+        document.getElementById("customer-phone").value;
+
+    const size =
+        document.getElementById("size").value;
+
+    const quantity =
+        document.getElementById("quantity").value;
+
+    const address =
+        document.getElementById("address").value;
+
+
+    const message =
+        "Hello ELVI COLLECTION!%0A%0A" +
+
+        "🛍️ NEW ORDER%0A%0A" +
+
+        "Product: " + selectedProduct + "%0A" +
+
+        "Name: " + name + "%0A" +
+
+        "Phone: " + phone + "%0A" +
+
+        "Size: " + size + "%0A" +
+
+        "Quantity: " + quantity + "%0A" +
+
+        "Address: " + address;
+
+
+    window.open(
+        "https://wa.me/251969770241?text=" + message,
+        "_blank"
+    );
 
 }
 
