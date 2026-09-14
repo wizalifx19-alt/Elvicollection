@@ -491,6 +491,86 @@
 .cart-overlay.active {
     display: block;
 }
+        .menu-btn {
+    display: none;
+
+    background: transparent;
+    border: none;
+
+    color: #f5f0e8;
+
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+/* PREMIUM ANIMATION */
+
+.hero-content {
+    animation: heroEnter 1.2s ease forwards;
+}
+
+@keyframes heroEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* MOBILE MENU */
+
+@media (max-width: 800px) {
+
+    .menu-btn {
+        display: block;
+    }
+
+    header {
+        position: fixed;
+    }
+
+    #main-nav {
+        position: absolute;
+
+        top: 80px;
+        left: 5%;
+        right: 5%;
+
+        display: none;
+
+        flex-direction: column;
+        gap: 0;
+
+        background: #151515;
+
+        padding: 20px;
+
+        border: 1px solid #292929;
+    }
+
+    #main-nav.active {
+        display: flex;
+    }
+
+    #main-nav a {
+        padding: 18px 10px;
+
+        border-bottom: 1px solid #292929;
+    }
+
+    #main-nav a:last-child {
+        border-bottom: none;
+    }
+
+}
     </style>
 </head>
 
@@ -504,12 +584,16 @@
             ELVI
         </div>
 
-        <nav>
-            <a href="#home">HOME</a>
-            <a href="#collection">COLLECTION</a>
-            <a href="#story">OUR STORY</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
+<button class="menu-btn" onclick="toggleMenu()">
+    ☰
+</button>
+
+<nav id="main-nav">
+    <a href="#home" onclick="closeMenu()">HOME</a>
+    <a href="#collection" onclick="closeMenu()">COLLECTION</a>
+    <a href="#story" onclick="closeMenu()">OUR STORY</a>
+    <a href="#contact" onclick="closeMenu()">CONTACT</a>
+</nav>
 
         <a href="#collection" class="shop-btn">
             SHOP
@@ -979,6 +1063,26 @@ function checkout() {
         "https://wa.me/251900000000?text=" + message,
         "_blank"
     );
+}
+
+</script>
+    <script>
+
+function toggleMenu() {
+
+    document
+        .getElementById("main-nav")
+        .classList.toggle("active");
+
+}
+
+
+function closeMenu() {
+
+    document
+        .getElementById("main-nav")
+        .classList.remove("active");
+
 }
 
 </script>
