@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ELVI COLLECTION | Luxury Abaya</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #0b0b0b;
+            color: #f5f0e8;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 24px 7%;
+
+            background: rgba(11, 11, 11, 0.82);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 28px;
+            letter-spacing: 5px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #eee;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #c9a96e;
+        }
+
+        .shop-btn {
+            border: 1px solid #c9a96e;
+            background: transparent;
+            color: #c9a96e;
+            padding: 12px 22px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .shop-btn:hover {
+            background: #c9a96e;
+            color: #111;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 140px 7% 80px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,0.9),
+                    rgba(0,0,0,0.55),
+                    rgba(0,0,0,0.2)
+                ),
+                url("https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .subtitle {
+            color: #c9a96e;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            letter-spacing: 5px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(60px, 8vw, 110px);
+            line-height: 0.95;
+            font-weight: normal;
+            margin-bottom: 30px;
+        }
+
+        h1 span {
+            color: #c9a96e;
+            font-style: italic;
+        }
+
+        .hero-text {
+            max-width: 470px;
+            color: #c7c2ba;
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .primary-btn {
+            display: inline-block;
+            padding: 16px 30px;
+
+            background: #c9a96e;
+            color: #111;
+
+            text-decoration: none;
+
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            transition: 0.3s;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            background: #e0c38c;
+        }
+
+        /* COLLECTION */
+
+        .collection {
+            padding: 120px 7%;
+            background: #111;
+        }
+
+        .section-label {
+            color: #c9a96e;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 50px;
+            font-weight: normal;
+            margin-bottom: 60px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            background: #171717;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+        }
+
+        .product-image {
+            height: 520px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s;
+        }
+
+        .product:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 25px;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            font-family: Arial, sans-serif;
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: #c9a96e;
+            font-family: Arial, sans-serif;
+        }
+
+        /* STORY */
+
+        .story {
+            min-height: 650px;
+            padding: 120px 7%;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,0.85),
+                    rgba(0,0,0,0.45)
+                ),
+                url("https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-content {
+            max-width: 650px;
+        }
+
+        .story h2 {
+            font-size: 60px;
+            font-weight: normal;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .story p {
+            font-family: Arial, sans-serif;
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 520px;
+        }
+
+        /* CONTACT */
+
+        .contact {
+            text-align: center;
+            padding: 120px 7%;
+            background: #0b0b0b;
+        }
+
+        .contact h2 {
+            font-size: 55px;
+            font-weight: normal;
+            margin-bottom: 35px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 45px 7%;
+            border-top: 1px solid #222;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding: 20px 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 130px 6% 70px;
+                background-position: 65% center;
+            }
+
+            h1 {
+                font-size: 65px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 500px;
+            }
+
+            .story h2 {
+                font-size: 45px;
+            }
+
+            .contact h2 {
+                font-size: 42px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header>
+
+        <div class="logo">
+            ELVI
+        </div>
+
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#collection">COLLECTION</a>
+            <a href="#story">OUR STORY</a>
+            <a href="#contact">CONTACT</a>
+        </nav>
+
+        <a href="#collection" class="shop-btn">
+            SHOP
+        </a>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="subtitle">
+                ELVI COLLECTION
+            </p>
+
+            <h1>
+                Modest.<br>
+                <span>Timeless.</span>
+            </h1>
+
+            <p class="hero-text">
+                Discover our curated collection of elegant abayas,
+                designed for the modern woman who believes
+                modesty is the ultimate form of elegance.
+            </p>
+
+            <a href="#collection" class="primary-btn">
+                EXPLORE COLLECTION
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- COLLECTION -->
+
+    <section class="collection" id="collection">
+
+        <p class="section-label">
+            THE COLLECTION
+        </p>
+
+        <h2 class="section-title">
+            Signature Abayas
+        </h2>
+
+
+        <div class="products">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?auto=format&fit=crop&w=900&q=85"
+                        alt="Luxury Abaya"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Noir Abaya
+                    </h3>
+
+                    <p>
+                        Classic black elegance
+                    </p>
+
+                    <div class="price">
+                        2,500 ETB
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85"
+                        alt="Premium Abaya"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Royal Abaya
+                    </h3>
+
+                    <p>
+                        Refined luxury
+                    </p>
+
+                    <div class="price">
+                        3,200 ETB
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85"
+                        alt="Elegant Abaya"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Elvi Classic
+                    </h3>
+
+                    <p>
+                        Effortless sophistication
+                    </p>
+
+                    <div class="price">
+                        2,800 ETB
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STORY -->
+
+    <section class="story" id="story">
+
+        <div class="story-content">
+
+            <p class="section-label">
+                OUR STORY
+            </p>
+
+            <h2>
+                Elegance is<br>
+                an attitude.
+            </h2>
+
+            <p>
+                ELVI COLLECTION was created with one vision:
+                to make modest fashion feel luxurious,
+                confident and timeless.
+
+                Every piece is carefully selected for women
+                who want their style to speak without saying
+                a word.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="contact" id="contact">
+
+        <p class="section-label">
+            CONTACT ELVI
+        </p>
+
+        <h2>
+            Your next abaya<br>
+            awaits.
+        </h2>
+
+        <a href="https://wa.me/251900000000" class="primary-btn">
+            ORDER ON WHATSAPP
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            © 2026 ELVI COLLECTION
+        </div>
+
+        <div>
+            LUXURY MODEST WEAR
+        </div>
+
+    </footer>
+
+</body>
+</html>
